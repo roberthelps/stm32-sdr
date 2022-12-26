@@ -1,0 +1,239 @@
+<!DOCTYPE CrossStudio_Project_File>
+<solution Name="dds_chirper" target="8" version="2">
+  <project Name="dds_chirper">
+    <configuration
+      Name="Common"
+      Target="STM32F103C8"
+      arm_architecture="v7M"
+      arm_core_type="Cortex-M3"
+      arm_linker_fiq_stack_size="256"
+      arm_linker_heap_size="128"
+      arm_linker_irq_stack_size="256"
+      arm_linker_jtag_pad_pre_dr="1"
+      arm_linker_jtag_pad_pre_ir="5"
+      arm_linker_stack_size="256"
+      arm_simulator_memory_simulation_filename="$(PackagesDir)/targets/ST_STM32F10x/STM32F10xSimulatorMemory.dll"
+      arm_simulator_memory_simulation_parameter="0x10000;0x2800"
+      arm_target_debug_interface_type="ADIv5"
+      arm_target_loader_parameter="8000000"
+      c_preprocessor_definitions="__TARGET_PROCESSOR=STM32F103C8;OSCILLATOR_CLOCK_FREQUENCY=8000000;STM32F103x6"
+      c_user_include_directories="$(ProjectDir)/source;$(ProjectDir)/si5351;$(ProjectDir)/STM32F1xx_HAL_Driver/Inc;$(ProjectDir)/system"
+      link_include_startup_code="No"
+      linker_memory_map_file="$(ProjectDir)/ST_STM32F103C8_MemoryMap.xml"
+      macros="Target=STM32F103C8;Placement=Flash;oscillator_frequency=8MHz"
+      oscillator_frequency="8MHz"
+      project_directory=""
+      project_type="Executable" />
+    <configuration
+      Name="RAM"
+      Placement="RAM"
+      linker_section_placement_file="$(ProjectDir)/scripts/sram_placement.xml"
+      target_reset_script="SRAMReset()" />
+    <configuration
+      Name="Flash"
+      Placement="Flash"
+      arm_target_flash_loader_file_path="$(PackagesDir)/targets/ST_STM32F10x/Release/Loader_rpc.elf"
+      arm_target_flash_loader_type="LIBMEM RPC Loader"
+      linker_section_placement_file="$(ProjectDir)/scripts/flash_placement.xml"
+      target_reset_script="FLASHReset()" />
+    <folder Name="startup">
+      <file file_name="startup/thumb_crt0.s" />
+      <file file_name="startup/STM32F10x_Startup.s" />
+    </folder>
+    <folder Name="source">
+      <file file_name="source/main.c" />
+      <file file_name="scripts/arduino-code.c">
+        <configuration
+          Name="THUMB Flash Debug"
+          build_exclude_from_build="Yes" />
+      </file>
+      <file file_name="source/stm32f1xx_hal_conf.h" />
+      <file file_name="source/stm32f1xx_it.c" />
+    </folder>
+    <folder Name="scripts">
+      <file file_name="scripts/STM32F10x_Target.js">
+        <configuration Name="Common" file_type="Reset Script" />
+      </file>
+      <file file_name="scripts/flash_placement.xml" />
+      <file file_name="scripts/ST_STM32F103C8_MemoryMap.xml" />
+    </folder>
+    <folder Name="si5351">
+      <file file_name="si5351/si5351.c" />
+      <file file_name="si5351/si5351.h" />
+    </folder>
+    <folder Name="STM32F1xx_HAL_Driver">
+      <folder Name="Inc">
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32_assert_template.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc_ex.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_adc.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_can.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cec.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_conf_template.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_crc.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dac_ex.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dac.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_eth.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_exti.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_hcd.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_i2c.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_i2s.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_irda.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_iwdg.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_mmc.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_nand.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_nor.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pccard.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pcd_ex.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pcd.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rtc_ex.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rtc.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_sd.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_smartcard.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_sram.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_usart.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_wwdg.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_adc.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_bus.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_cortex.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_crc.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_dac.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_dma.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_exti.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_fsmc.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_gpio.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_i2c.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_iwdg.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_pwr.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_rcc.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_rtc.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_sdmmc.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_spi.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_system.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_tim.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_usart.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_usb.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_utils.h" />
+        <file file_name="STM32F1xx_HAL_Driver/Inc/stm32f1xx_ll_wwdg.h" />
+      </folder>
+      <folder Name="Src">
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc.c" />
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_adc_ex.c" />
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c" />
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_can.c" />
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cec.c" />
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c" />
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_crc.c" />
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dac.c" />
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dac_ex.c" />
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c" />
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_eth.c" />
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_exti.c" />
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.c" />
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.c" />
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.c" />
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c" />
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_hcd.c" />
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_i2c.c" />
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_i2s.c" />
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_irda.c" />
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_iwdg.c" />
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_mmc.c" />
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_msp_template.c" />
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_nand.c" />
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_nor.c" />
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pccard.c" />
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pcd.c" />
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pcd_ex.c" />
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.c" />
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.c" />
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.c" />
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc.c" />
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rtc_ex.c" />
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_sd.c" />
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_smartcard.c" />
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_spi.c" />
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_sram.c" />
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.c" />
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_timebase_rtc_alarm_template.c" />
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_timebase_tim_template.c">
+          <configuration
+            Name="THUMB Flash Debug"
+            build_exclude_from_build="Yes" />
+        </file>
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.c" />
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.c" />
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_usart.c" />
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_wwdg.c" />
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_adc.c" />
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_crc.c" />
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_dac.c" />
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_dma.c" />
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_exti.c" />
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_fsmc.c" />
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_gpio.c" />
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_i2c.c" />
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_pwr.c" />
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_rcc.c" />
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_rtc.c" />
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_sdmmc.c" />
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_spi.c" />
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_tim.c" />
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_usart.c" />
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_usb.c" />
+        <file file_name="STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_utils.c" />
+      </folder>
+    </folder>
+    <folder Name="system">
+      <file file_name="system/system_stm32f1xx.c" />
+      <file file_name="system/system_stm32f1xx.h" />
+    </folder>
+  </project>
+  <configuration
+    Name="THUMB Flash Debug"
+    inherited_configurations="THUMB;Flash;Debug" />
+  <configuration
+    Name="THUMB"
+    Platform="ARM"
+    arm_instruction_set="Thumb"
+    arm_library_instruction_set="Thumb"
+    c_preprocessor_definitions="__THUMB"
+    hidden="Yes" />
+  <configuration
+    Name="Flash"
+    c_preprocessor_definitions="__FLASH_BUILD"
+    hidden="Yes" />
+  <configuration
+    Name="Debug"
+    c_preprocessor_definitions="DEBUG"
+    gcc_debugging_level="Level 3"
+    gcc_omit_frame_pointer="Yes"
+    gcc_optimization_level="None"
+    hidden="Yes" />
+  <configuration
+    Name="THUMB Flash Release"
+    inherited_configurations="THUMB;Flash;Release" />
+  <configuration
+    Name="Release"
+    c_preprocessor_definitions="NDEBUG"
+    gcc_debugging_level="None"
+    gcc_omit_frame_pointer="Yes"
+    gcc_optimization_level="Level 1"
+    hidden="Yes" />
+  <configuration Name="Common" />
+</solution>
